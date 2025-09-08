@@ -1,6 +1,7 @@
 import os
-import json
+
 from pycocotools.coco import COCO
+
 
 def coco_to_yolo(coco_json, image_dir, label_dir, class_names):
     # 创建标签输出目录
@@ -11,19 +12,19 @@ def coco_to_yolo(coco_json, image_dir, label_dir, class_names):
 
     for image_id in image_ids:
         image_info = coco.loadImgs(image_id)[0]
-        file_name = image_info['file_name']
-        width = image_info['width']
-        height = image_info['height']
+        file_name = image_info["file_name"]
+        width = image_info["width"]
+        height = image_info["height"]
 
         annotations = coco.loadAnns(coco.getAnnIds(imgIds=image_id))
 
-        label_path = os.path.join(label_dir, file_name.rsplit('.', 1)[0] + '.txt')
+        label_path = os.path.join(label_dir, file_name.rsplit(".", 1)[0] + ".txt")
         os.makedirs(os.path.dirname(label_path), exist_ok=True)
 
-        with open(label_path, 'w') as f:
+        with open(label_path, "w") as f:
             for ann in annotations:
-                category_id = ann['category_id']
-                bbox = ann['bbox']
+                category_id = ann["category_id"]
+                bbox = ann["bbox"]
 
                 x_center = (bbox[0] + bbox[2] / 2) / width
                 y_center = (bbox[1] + bbox[3] / 2) / height
@@ -38,19 +39,32 @@ def coco_to_yolo(coco_json, image_dir, label_dir, class_names):
 
 # FLIR 数据集类名顺序（按 coco.json 中顺序）
 class_names = [
-    "person", "bike", "car", "motor", "bus", "train", "truck",
-    "light", "hydrant", "sign", "dog", "deer", "skateboard",
-    "stroller", "scooter", "other vehicle"
+    "person",
+    "bike",
+    "car",
+    "motor",
+    "bus",
+    "train",
+    "truck",
+    "light",
+    "hydrant",
+    "sign",
+    "dog",
+    "deer",
+    "skateboard",
+    "stroller",
+    "scooter",
+    "other vehicle",
 ]
 
 # 设置路径（根据你实际下载的位置）
-train_json = 'C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_train/coco.json'
-train_images = 'C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_train'
-train_labels = 'C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/labels/train'
+train_json = "C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_train/coco.json"
+train_images = "C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_train"
+train_labels = "C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/labels/train"
 
-val_json = 'C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_val/coco.json'
-val_images = 'C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_val'
-val_labels = 'C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/labels/val'
+val_json = "C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_val/coco.json"
+val_images = "C:/Users/blackvccat/Downloads/FLIR_ADAS_v2/images_thermal_val"
+val_labels = "C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/labels/val"
 
 # 执行转换
 print("=== 开始转换训练集 ===")
