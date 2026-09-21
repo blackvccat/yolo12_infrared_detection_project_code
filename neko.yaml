@@ -1,7 +1,24 @@
-
 train: C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/images/train
 val: C:/Users/blackvccat/PycharmProjects/PythonProject/ultralytics/datasets/images/val
 # 标签路径，指向 data 子文件夹
 
-nc: 16  # 类别数量，根据你的数据集的类别来设置
-names: ['person', 'bike', 'car', 'motor', 'bus', 'train', 'truck', 'light', 'hydrant', 'sign', 'dog', 'deer', 'skateboard', 'stroller', 'scooter', 'other vehicle']
+nc: 16 # 类别数量，根据你的数据集的类别来设置
+names:
+  [
+    "person",
+    "bike",
+    "car",
+    "motor",
+    "bus",
+    "train",
+    "truck",
+    "light",
+    "hydrant",
+    "sign",
+    "dog",
+    "deer",
+    "skateboard",
+    "stroller",
+    "scooter",
+    "other vehicle",
+  ]
